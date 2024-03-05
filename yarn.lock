@@ -1836,6 +1836,14 @@ comment-json@4.2.3:
     has-own-prop "^2.0.0"
     repeat-string "^1.6.1"
 
+commit-msg-linter@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/commit-msg-linter/-/commit-msg-linter-1.0.0.tgz#45a29e9c38d8bb71e98d4da67f230abf01b46463"
+  integrity sha512-Di9oAjfjIwAcASQ8abW1936twemUdDQq4D1dBL42Y+S6rNXykauIBPztj8Ej4/MjI6zIziLVzfhmdkg0z4I4rg==
+  dependencies:
+    did-you-mean "^0.0.1"
+    supports-color "^8.1.1"
+
 component-emitter@^1.3.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.3.1.tgz#ef1d5796f7d93f135ee6fb684340b26403c97d17"
@@ -2015,6 +2023,14 @@ dezalgo@^1.0.4:
   dependencies:
     asap "^2.0.0"
     wrappy "1"
+
+did-you-mean@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/did-you-mean/-/did-you-mean-0.0.1.tgz#8851ce82407903cb62c12cb6ad4f676921ccdec3"
+  integrity sha512-rKxPpbrHr4/u8VMPde6Z3DhbGoXw7kepHZIU2FGs+IU+LKnhEIlw1cx80FZ7fLruJXDyu0slKMai2FhPRZjwxQ==
+  dependencies:
+    levenshtein "*"
+    underscore "*"
 
 diff-sequences@^29.6.3:
   version "29.6.3"
@@ -2582,6 +2598,14 @@ get-stream@^6.0.0:
   resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-6.0.1.tgz#a262d8eef67aced57c2852ad6167526a43cbf7b7"
   integrity sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==
 
+git-commit-msg-linter@^5.0.6:
+  version "5.0.6"
+  resolved "https://registry.yarnpkg.com/git-commit-msg-linter/-/git-commit-msg-linter-5.0.6.tgz#cb055c0c340d5e3e0acf8d8ff979a29c2cf039a6"
+  integrity sha512-Lp8JpY9JWHkBriZ37ln83DGK0iYQRx9dTJ4ut83XF+kBAc+kDtRU9GL5b8Cd9oujr5F3NYG+LWwZc3tYXZRK+w==
+  dependencies:
+    chalk "^2.4.2"
+    commit-msg-linter "^1.0.0"
+
 glob-parent@^5.1.2, glob-parent@~5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
@@ -2739,6 +2763,11 @@ human-signals@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
+
+husky@^9.0.11:
+  version "9.0.11"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-9.0.11.tgz#fc91df4c756050de41b3e478b2158b87c1e79af9"
+  integrity sha512-AB6lFlbwwyIqMdHYhwPe+kjOC3Oc5P3nThEoW/AaO2BX3vJDjWPFxYLxokUZOo6RNX20He3AaT8sESs9NJcmEw==
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
@@ -3448,6 +3477,11 @@ leven@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-3.1.0.tgz#77891de834064cccba82ae7842bb6b14a13ed7f2"
   integrity sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==
+
+levenshtein@*:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/levenshtein/-/levenshtein-1.0.5.tgz#3911737a9cb56da345d008f55782c6f138979ba3"
+  integrity sha512-UQf1nnmxjl7O0+snDXj2YF2r74Gkya8ZpnegrUBYN9tikh2dtxV/ey8e07BO5wwo0i76yjOvbDhFHdcPEiH9aA==
 
 levn@^0.4.1:
   version "0.4.1"
@@ -4497,7 +4531,7 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-supports-color@^8.0.0:
+supports-color@^8.0.0, supports-color@^8.1.1:
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-8.1.1.tgz#cd6fc17e28500cff56c1b86c0a7fd4a54a73005c"
   integrity sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==
@@ -4725,6 +4759,11 @@ uid@2.0.2:
   dependencies:
     "@lukeed/csprng" "^1.0.0"
 
+underscore@*:
+  version "1.13.6"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.13.6.tgz#04786a1f589dc6c09f761fc5f45b89e935136441"
+  integrity sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==
+
 undici-types@~5.26.4:
   version "5.26.5"
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-5.26.5.tgz#bcd539893d00b56e964fd2657a4866b221a65617"
@@ -4867,6 +4906,7 @@ which@^2.0.1:
     isexe "^2.0.0"
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==

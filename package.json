@@ -1,10 +1,15 @@
 {
+  "husky": {
+    "hooks": {
+      "commit-msg": "npm run lint:commit"
+    }
+  },
   "name": "nestjs-auth-api",
   "version": "0.0.1",
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -17,12 +22,15 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "lint:commit": "git-commit-msg-linter"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
+    "git-commit-msg-linter": "^5.0.6",
+    "husky": "^9.0.11",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1"
   },

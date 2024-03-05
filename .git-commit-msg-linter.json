@@ -1,0 +1,17 @@
+{
+  "types": [
+    "feat",
+    "fix",
+    "docs",
+    "style",
+    "refactor",
+    "perf",
+    "test",
+    "chore"
+  ],
+  "scope": {
+    "required": true,
+    "allowed": ["frontend", "backend", "docs", "config", "test", "other"]
+  },
+  "warnOnFailure": false
+}
