@@ -1,22 +1,23 @@
-import { DataSource, Repository } from 'typeorm';
-import { Injectable } from '@nestjs/common';
-import { User } from './user.entity';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UserRole } from './enum/user-roles.enum';
+import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
 import {
   ConflictException,
   InternalServerErrorException,
 } from '@nestjs/common';
+import { User } from './user.entity';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UserRole } from './enum/user-roles.enum';
 
-@Injectable()
-export class UserRepository extends Repository<User> {
-  constructor(private dataSource: DataSource) {
-    super(User, dataSource.createEntityManager());
-  }
+export interface UserRepository extends Repository<User> {
+  this: Repository<User>;
+  createUser(createUserDto: CreateUserDto, role: UserRole): Promise<User>;
+  hashPassword(password: string, salt: string): Promise<string>;
+}
 
+export const customUserRepository: Pick<UserRepository, any> = {
   async createUser(
+    this: UserRepository,
     createUserDto: CreateUserDto,
     role: UserRole,
   ): Promise<User> {
@@ -44,9 +45,9 @@ export class UserRepository extends Repository<User> {
         );
       }
     }
-  }
+  },
 
-  private async hashPassword(password: string, salt: string): Promise<string> {
+  async hashPassword(password: string, salt: string): Promise<string> {
     return bcrypt.hash(password, salt);
-  }
-}
+  },
+};

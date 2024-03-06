@@ -8,8 +8,7 @@ import { User } from './user.entity';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(UserRepository)
-    private userRepository: UserRepository,
+    @InjectRepository(User) private readonly userRepository: UserRepository,
   ) {}
 
   async createAdminUser(createUserDto: CreateUserDto): Promise<User> {
