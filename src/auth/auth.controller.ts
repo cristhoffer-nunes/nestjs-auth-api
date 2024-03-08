@@ -10,7 +10,6 @@ export class AuthController {
   async signUp(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<{ message: string }> {
-    console.log(createUserDto);
     await this.authService.signUp(createUserDto);
     return {
       message: 'Cadastro realizado com sucesso',
