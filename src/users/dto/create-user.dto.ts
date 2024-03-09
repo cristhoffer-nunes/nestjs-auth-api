@@ -35,10 +35,10 @@ export class CreateUserDto {
   @MinLength(6, {
     message: 'A senha deve ter no mínimo 6 caracteres',
   })
-  @Matches(/(?=.*[A-Z])$/, {
+  @Matches(/^(?=.*[A-Z]).*$/, {
     message: 'A senha deve ter no mínimo 1 letra maiúscula',
   })
-  @Matches(/(?=.*[!@#$%^&*()_+\-={}[\]:;"'|<>,.?/])$/, {
+  @Matches(/(?=.*[!@#$%^&*()_+\-={}[\]:;"'|<>,.?/])/, {
     message: 'A senha deve ter no mínimo 1 caractere especial',
   })
   password: string;
@@ -49,10 +49,10 @@ export class CreateUserDto {
   @MinLength(6, {
     message: 'A confirmação de senha deve ter no mínimo 6 caracteres',
   })
-  @Matches(/(?=.*[A-Z])$/, {
+  @Matches(/^(?=.*[A-Z]).*$/, {
     message: 'A confirmação de senha deve ter no mínimo 1 letra maiúscula',
   })
-  @Matches(/(?=.*[!@#$%^&*()_+\-={}[\]:;"'|<>,.?/])$/, {
+  @Matches(/.*[!@#$%^&*()_+\-={}[\]:;"'|<>,.?/].*/, {
     message: 'A confirmação de senha deve ter no mínimo 1 caractere especial',
   })
   passwordConfirmation: string;
