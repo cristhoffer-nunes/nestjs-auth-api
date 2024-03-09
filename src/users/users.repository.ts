@@ -8,11 +8,13 @@ import {
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserRole } from './enum/user-roles.enum';
+import { CredentialsDto } from 'src/auth/dto/credentials.dto';
 
 export interface UserRepository extends Repository<User> {
   this: Repository<User>;
   createUser(createUserDto: CreateUserDto, role: UserRole): Promise<User>;
   hashPassword(password: string, salt: string): Promise<string>;
+  checkCredentials(credentialsDto: CredentialsDto): Promise<User>;
 }
 
 export const customUserRepository: Pick<UserRepository, any> = {
@@ -44,6 +46,25 @@ export const customUserRepository: Pick<UserRepository, any> = {
           'Erro ao salvar o usuário no banco de dados',
         );
       }
+    }
+  },
+
+  async checkCredentials(
+    this: Repository<User>,
+    credentialsDto: CredentialsDto,
+  ): Promise<User> {
+    const { email, password } = credentialsDto;
+    const user = await this.findOne({
+      where: {
+        email: email,
+        status: true,
+      },
+    });
+
+    if (user && (await user.checkPassword(password))) {
+      return user;
+    } else {
+      return null;
     }
   },
 
