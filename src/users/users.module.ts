@@ -9,9 +9,13 @@ import { User } from './user.entity';
 import { DataSource } from 'typeorm';
 import { customUserRepository } from './users.repository';
 import { UsersController } from './users.controller';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+  ],
   controllers: [UsersController],
   providers: [
     {
