@@ -13,6 +13,7 @@ import { CredentialsDto } from 'src/auth/dto/credentials.dto';
 export interface UserRepository extends Repository<User> {
   this: Repository<User>;
   createUser(createUserDto: CreateUserDto, role: UserRole): Promise<User>;
+  findOneById(id: string): Promise<User>;
   hashPassword(password: string, salt: string): Promise<string>;
   checkCredentials(credentialsDto: CredentialsDto): Promise<User>;
 }
@@ -47,6 +48,17 @@ export const customUserRepository: Pick<UserRepository, any> = {
         );
       }
     }
+  },
+
+  async findOneById(this: Repository<User>, id: string): Promise<User> {
+    const user = await this.findOne({
+      where: {
+        id: id,
+      },
+      select: ['email', 'name', 'role', 'id'],
+    });
+
+    return user;
   },
 
   async checkCredentials(
