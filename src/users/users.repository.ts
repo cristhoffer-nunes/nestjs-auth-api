@@ -16,6 +16,7 @@ export interface UserRepository extends Repository<User> {
   findOneById(id: string): Promise<User>;
   hashPassword(password: string, salt: string): Promise<string>;
   checkCredentials(credentialsDto: CredentialsDto): Promise<User>;
+  changePassword(id: string, password: string);
 }
 
 export const customUserRepository: Pick<UserRepository, any> = {
@@ -82,5 +83,17 @@ export const customUserRepository: Pick<UserRepository, any> = {
 
   async hashPassword(password: string, salt: string): Promise<string> {
     return bcrypt.hash(password, salt);
+  },
+
+  async changePassword(this: UserRepository, id: string, password: string) {
+    const user = await this.findOne({
+      where: {
+        id: id,
+      },
+    });
+    user.salt = await bcrypt.genSalt();
+    user.password = await this.hashPassword(password, user.salt);
+    user.recoverToken = null;
+    await user.save();
   },
 };

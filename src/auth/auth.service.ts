@@ -12,6 +12,8 @@ import { UserRepository } from 'src/users/users.repository';
 import { CredentialsDto } from './dto/credentials.dto';
 import { JwtService } from '@nestjs/jwt';
 import { MailerService } from '@nestjs-modules/mailer';
+import { randomBytes } from 'crypto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -68,5 +70,61 @@ export class AuthService {
       { confirmationToken: null },
     );
     if (result.affected === 0) throw new NotFoundException('Token inválido');
+  }
+
+  async sendRecoverPasswordEmail(email: string): Promise<void> {
+    const user = await this.userRepository.findOne({
+      where: {
+        email: email,
+      },
+    });
+
+    if (!user)
+      throw new NotFoundException('Não há usuário cadastrado com esse email.');
+
+    user.recoverToken = randomBytes(32).toString('hex');
+    await user.save();
+
+    const mail = {
+      to: user.email,
+      from: 'noreply@application.com',
+      subject: 'Recuperação de senha',
+      template: 'recover-password',
+      context: {
+        token: user.recoverToken,
+      },
+    };
+    await this.mailerService.sendMail(mail);
+  }
+
+  async changePassword(
+    id: string,
+    changePasswordDto: ChangePasswordDto,
+  ): Promise<void> {
+    const { password, passwordConfirmation } = changePasswordDto;
+
+    if (password != passwordConfirmation)
+      throw new UnprocessableEntityException('As senhas não conferem');
+
+    await this.userRepository.changePassword(id, password);
+  }
+
+  async resetPassword(
+    recoverToken: string,
+    changePasswordDto: ChangePasswordDto,
+  ): Promise<void> {
+    const user = await this.userRepository.findOne({
+      where: {
+        recoverToken: recoverToken,
+      },
+      select: ['id'],
+    });
+    if (!user) throw new NotFoundException('Token inválido.');
+
+    try {
+      await this.changePassword(user.id.toString(), changePasswordDto);
+    } catch (error) {
+      throw error;
+    }
   }
 }
